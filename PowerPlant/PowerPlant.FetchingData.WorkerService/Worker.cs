@@ -104,7 +104,7 @@ namespace PowerPlant.FetchingData.WorkerService
                     _logger.LogCritical($"ex : {ex}");
                 }
 
-                await Task.Delay(minute/6, stoppingToken);
+                await Task.Delay(hour, stoppingToken);
             }
         }
 
