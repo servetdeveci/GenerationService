@@ -1,0 +1,38 @@
+<h1>Detay</h1>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <strong>id: </strong> {{detail.id}} <br />
+  </div>
+  <div class="col-12 col-md-4">
+    <strong>webId: </strong> {{detail.webId}} <br />
+  </div>
+  <div class="col-12 col-md-4">
+    <a routerLink="/home" class="btn btn-outline-info">Listeye Dön</a>
+  </div>
+</div>
+
+<hr /><br />
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Değer</th>
+      <th>Zaman</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pp of powerPlantData">
+      
+      <td>
+          {{ pp.id }}
+      </td>
+      <td>
+        {{ pp.value }}
+      </td>
+      <td>
+        {{ pp.createdDate | date :'yyyy/MM/dd HH:mm:ss' }}
+      </td>
+    </tr>
+  </tbody>
+</table>

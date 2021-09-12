@@ -1,0 +1,32 @@
+<h1>Düzenleme</h1>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+
+        <div class="form-group">
+          <label for="name">WebId</label>
+          <input class="form-control"
+                 id="webId"
+                 required
+                 [(ngModel)]="edit.webId"
+                 name="webId" />
+        </div>
+        <div class="form-group">
+          <small [class]="statusClass">{{connectionMessage}}</small>
+        </div>
+        <a routerLink="/home" class="btn btn-secondary">Listeye Dön</a>
+        <button (click)="save()" class="btn btn-success float-right">Kaydet</button>
+      </div>
+
+
+      <div *ngIf="submitted">
+        <h4>Gönderildi!</h4>
+        <small [class]="statusClass">{{connectionMessage}}</small>
+        <a routerLink="/home" class="btn btn-success">Listeye Dön</a>
+      </div>
+    </div>
+  </div>
+
+</div>

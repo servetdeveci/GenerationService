@@ -1,0 +1,44 @@
+
+<small class="text-danger">{{connectionMessage}}</small>
+<br />
+<div class="row">
+  <div class="col-12">
+    <a routerLink="/add" class="btn btn-success float-right">
+      Yeni Ekle
+    </a>
+  </div>
+</div>
+<br />
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>İşlemler</th>
+      <th>ID</th>
+      <th>WebId</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pp of powerPlants">
+      <td>
+        <a routerLink="/edit/{{ pp.id
+  }}" class="btn btn-outline-primary btn-sm mr-1">
+  <mat-icon>edit</mat-icon>
+  </a>
+  <button routerLink="/delete/{{ pp.id }}" class="btn btn-outline-danger btn-sm mr-1">
+    <mat-icon>delete</mat-icon>
+  </button>
+  </td>
+  <td>
+    <a routerLink="/detail/{{ pp.id }}" class="">
+      {{ pp.id }}
+    </a>
+  </td>
+  <td>
+    <a routerLink="/detail/{{ pp.id }}" class="">
+      {{ pp.webId }}
+    </a>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+

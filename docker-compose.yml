@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  #unittest:
+  #  container_name: 'unittest'
+  #  image: unittest
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile-test
+  #  depends_on:
+  #    - webapi
+  angular:
+    container_name: 'angular'
+    image: 'powerplant-angular'
+    build:
+      context: PowerPlant/PowerPlant.UI.Angular/ClientApp
+      dockerfile: Dockerfile-angular
+    ports: 
+      - "4200:80"
+    depends_on:
+      - 'webapi'
+    networks:
+      - power-plant-network  
+  webapi:
+    container_name: 'webapi'
+    image: 'powerplant-api'
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    ports:
+      - '80:80'
+    depends_on:
+      - 'database'
+    networks:
+      - power-plant-network  
+  hourlyservice:
+        container_name: 'hourly-worker'
+        image: 'hourly-worker'
+        build:
+          context: .
+          dockerfile: Dockerfile-ws
+        depends_on:
+          - 'webapi'
+        networks:
+          - power-plant-network  
+  database:
+    container_name: 'database'
+    image: postgres
+    ports:
+      - '5432:5432'
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pass
+    #volumes:
+    #    - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - power-plant-network
+
+networks:
+  power-plant-network:
+    driver: bridge
