@@ -33,7 +33,7 @@ export class DetailPowerPlantComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
-      order: [3, 'desc'],
+      order: [2, 'desc'],
       language: {
         "emptyTable": "Tabloda herhangi bir veri mevcut değil",
         "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",

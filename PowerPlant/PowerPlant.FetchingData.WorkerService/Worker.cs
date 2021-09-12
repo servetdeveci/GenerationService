@@ -57,7 +57,7 @@ namespace PowerPlant.FetchingData.WorkerService
                         _logger.LogInformation($"webId: {item.WebId} verileri çekiliyor...");
                         var dateTime = DateTime.Now;
                         var endTime = dateTime.ToString();
-                        var startTime = dateTime.AddDays(-1).ToString();
+                        var startTime = dateTime.AddHours(-1).ToString();
                         response = _client.GetAsync($"generationservice/get?webId={item.WebId}&startTime={startTime}&endTime={endTime}").Result;    
                         responseBody = response.Content.ReadAsStringAsync().Result;
                         var usages = JsonConvert.DeserializeObject<ApiResponse<TimedValues>>(responseBody);
