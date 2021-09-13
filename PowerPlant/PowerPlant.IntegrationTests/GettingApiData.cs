@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PowerPlant.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -24,11 +25,24 @@ namespace PowerPlant.IntegrationTests
 
             // Cagir
             var response = await _client.SendAsync(request);
-            var b = response.Content.ReadAsStringAsync().Result;
-            var pps = JsonConvert.DeserializeObject<List<PowerPlantDef>>(b);
+            var body = response.Content.ReadAsStringAsync().Result;
+            var pps = JsonConvert.DeserializeObject<List<PowerPlantDef>>(body);
 
             // kontrol et
             Assert.NotNull(pps);
+        }
+
+        [Fact]
+        public async Task Challenge_Get_Power_Plants_DataTables()
+        {
+            // Ayarla
+            var request = new HttpRequestMessage(HttpMethod.Get, ":4200/#/home");
+
+            // Cagir
+            var response = await _client.SendAsync(request);
+            var body = response.Content.ReadAsStringAsync().Result;
+            
+            Assert.Contains("dataTables_paginate paging_full_numbers", body);
         }
     }
 }
