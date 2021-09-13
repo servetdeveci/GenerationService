@@ -21,8 +21,15 @@
     </PackageReference>
   </ItemGroup>
 
+  
   <ItemGroup>
     <ProjectReference Include="..\PowerPlant.API\PowerPlant.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using PowerPlant.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -21,7 +22,7 @@ namespace PowerPlant.IntegrationTests
         public async Task Challenge_Get_All_Power_Plants()
         {
             // Ayarla
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/PowerPlant");
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/PowerPlant");
 
             // Cagir
             var response = await _client.SendAsync(request);
@@ -36,7 +37,9 @@ namespace PowerPlant.IntegrationTests
         public async Task Challenge_Get_Power_Plants_DataTables()
         {
             // Ayarla
-            var request = new HttpRequestMessage(HttpMethod.Get, ":4200/#/home");
+            Thread.Sleep(5000);
+            _client.BaseAddress = new Uri("http://localhost:4200");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/");
 
             // Cagir
             var response = await _client.SendAsync(request);

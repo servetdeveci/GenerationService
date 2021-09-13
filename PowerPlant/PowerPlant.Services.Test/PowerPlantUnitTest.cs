@@ -45,7 +45,7 @@ namespace PowerPlant.Test
                 Id = Guid.NewGuid().ToString(),
                 PowerPlantId = "sample_id1",
                 CreatedDate = DateTime.Now,
-                Value = 10
+                Value = "10"
             };
             var result = _powerPlantDatumService.Add(obj).Result;
             Assert.Equal(1, result);
