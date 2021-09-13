@@ -16,7 +16,8 @@ namespace PowerPlant.Infrastructure.Extensions
             // Configure DbContext with Scoped lifetime
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                var connectionstring = configuration.GetConnectionString("DefaultConnection");
+                options.UseNpgsql(connectionstring);
             }
             );
 
