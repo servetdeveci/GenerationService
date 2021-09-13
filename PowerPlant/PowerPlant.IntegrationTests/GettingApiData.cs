@@ -21,27 +21,22 @@ namespace PowerPlant.IntegrationTests
         [Fact]
         public async Task Challenge_Get_All_Power_Plants()
         {
-            // Ayarla
             var request = new HttpRequestMessage(HttpMethod.Get, "api/PowerPlant");
 
-            // Cagir
             var response = await _client.SendAsync(request);
             var body = response.Content.ReadAsStringAsync().Result;
             var pps = JsonConvert.DeserializeObject<List<PowerPlantDef>>(body);
 
-            // kontrol et
             Assert.NotNull(pps);
         }
 
         [Fact]
         public async Task Challenge_Get_Power_Plants_DataTables()
         {
-            // Ayarla
             Thread.Sleep(5000);
             _client.BaseAddress = new Uri("http://localhost:4200");
-            var request = new HttpRequestMessage(HttpMethod.Get, "/");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/home");
 
-            // Cagir
             var response = await _client.SendAsync(request);
             var body = response.Content.ReadAsStringAsync().Result;
             
