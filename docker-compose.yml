@@ -32,6 +32,18 @@ services:
       - 'database'
     networks:
       - power-plant-network  
+  generation-service:
+    container_name: 'generation-service'
+    image: 'generation-service'
+    build:
+      context: .
+      dockerfile: Dockerfile-gs
+    ports:
+      - '81:81'
+    depends_on:
+      - 'database'
+    networks:
+      - power-plant-network  
   hourlyservice:
         container_name: 'hourly-worker'
         image: 'hourly-worker'
