@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace PowerPlant.IntegrationTests
 {
-    public class ApiTestFixture : IDisposable
+    public class GenerationServiceTestFixture : IDisposable
     {
         private readonly TestServer _apiTestServer;
 
-        public ApiTestFixture()
+        public GenerationServiceTestFixture()
         {
             var builder = new WebHostBuilder()
-                .UseStartup<API.Startup>();
+                .UseStartup<GenerationService.Startup>();
             _apiTestServer = new TestServer(builder);
 
             Client = _apiTestServer.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost:52586/api");
+            Client.BaseAddress = new Uri("http://localhost:5000/api");
         }
 
         public HttpClient Client { get; }

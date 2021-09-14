@@ -24,6 +24,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\PowerPlant.API\PowerPlant.API.csproj" />
+    <ProjectReference Include="..\PowerPlant.GenerationService\PowerPlant.GenerationService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
