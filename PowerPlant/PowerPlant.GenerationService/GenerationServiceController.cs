@@ -5,7 +5,7 @@ using PowerPlant.Domain.ViewModels;
 using System;
 using System.Threading.Tasks;
 
-namespace PowerPlant.API.Controllers
+namespace PowerPlant.GenerationService
 {
     [Route("api/[controller]")]
     [ApiController]

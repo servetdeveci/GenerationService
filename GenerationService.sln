@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerFiles", "DockerFiles"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		Dockerfile-api = Dockerfile-api
+		Dockerfile-gs = Dockerfile-gs
 		Dockerfile-test = Dockerfile-test
 		Dockerfile-ws = Dockerfile-ws
 	EndProjectSection
@@ -36,6 +37,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.IntegrationTests", "PowerPlant\PowerPlant.IntegrationTests\PowerPlant.IntegrationTests.csproj", "{8CE71FB6-B262-4CF0-9CCD-984ED0CF18FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.Services.UnitTest", "PowerPlant\PowerPlant.Services.UnitTest\PowerPlant.Services.UnitTest.csproj", "{77E26AF2-6A65-421D-8782-11AC300BF090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerPlant.GenerationService", "PowerPlant\PowerPlant.GenerationService\PowerPlant.GenerationService.csproj", "{FB094BD4-4552-4382-B801-AB8CC43BD918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +90,10 @@ Global
 		{77E26AF2-6A65-421D-8782-11AC300BF090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E26AF2-6A65-421D-8782-11AC300BF090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E26AF2-6A65-421D-8782-11AC300BF090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB094BD4-4552-4382-B801-AB8CC43BD918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB094BD4-4552-4382-B801-AB8CC43BD918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB094BD4-4552-4382-B801-AB8CC43BD918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB094BD4-4552-4382-B801-AB8CC43BD918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +110,7 @@ Global
 		{8C758228-E063-48F6-BA3B-F295C62A4D42} = {C1C0E94B-3B43-426B-8DDA-604BC7DDC8E3}
 		{8CE71FB6-B262-4CF0-9CCD-984ED0CF18FD} = {C1C0E94B-3B43-426B-8DDA-604BC7DDC8E3}
 		{77E26AF2-6A65-421D-8782-11AC300BF090} = {C1C0E94B-3B43-426B-8DDA-604BC7DDC8E3}
+		{FB094BD4-4552-4382-B801-AB8CC43BD918} = {C1C0E94B-3B43-426B-8DDA-604BC7DDC8E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E641922-7E35-4817-9832-17503A51ECAA}

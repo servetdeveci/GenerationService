@@ -17,7 +17,8 @@ namespace PowerPlant.FetchingData.WorkerService
     {
         #region Props&Fields&Ctor
         private readonly ILogger<Worker> _logger;
-        private HttpClient _client;
+        private HttpClient _generationServiceSlient;
+        private HttpClient _powerPlantServiceClient;
         int second, minute, hour;
         const int timeFactor = 60;
         public Worker(ILogger<Worker> logger)
@@ -31,8 +32,12 @@ namespace PowerPlant.FetchingData.WorkerService
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation($"***** Hourly service is started  *******", DateTimeOffset.Now);
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://webapi/api/");
+            _powerPlantServiceClient = new HttpClient();
+            _powerPlantServiceClient.BaseAddress = new Uri("http://webapi/api/");
+
+            _generationServiceSlient = new HttpClient();
+            _generationServiceSlient.BaseAddress = new Uri("http://generation-service/api/");
+
             return base.StartAsync(cancellationToken);
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -63,7 +68,7 @@ namespace PowerPlant.FetchingData.WorkerService
         #region PowerPlantFetchingData
         private void GettingPowerPlantAndItsData()
         {
-            var response = _client.GetAsync($"powerplant").Result;
+            var response = _powerPlantServiceClient.GetAsync($"powerplant").Result;
             var responseBody = response.Content.ReadAsStringAsync().Result;
             var list = JsonConvert.DeserializeObject<List<PowerPlantDef>>(responseBody);
             foreach (var item in list)
@@ -77,7 +82,7 @@ namespace PowerPlant.FetchingData.WorkerService
             var dateTime = DateTime.Now;
             var endTime = dateTime.ToString();
             var startTime = dateTime.AddHours(-1).ToString();
-            response = _client.GetAsync($"generationservice/get?webId={item.WebId}&startTime={startTime}&endTime={endTime}").Result;
+            response = _generationServiceSlient.GetAsync($"generationservice/get?webId={item.WebId}&startTime={startTime}&endTime={endTime}").Result;
             responseBody = response.Content.ReadAsStringAsync().Result;
             var usages = JsonConvert.DeserializeObject<ApiResponse<TimedValues>>(responseBody);
 
@@ -103,7 +108,7 @@ namespace PowerPlant.FetchingData.WorkerService
                 Value = JsonConvert.SerializeObject(value.Value),
                 CreatedDate = value.Timestamp
             };
-            response = _client.PostAsync($"PowerPlantData", new StringContent(JsonConvert.SerializeObject(datum), Encoding.UTF8, "application/json")).Result;
+            response = _powerPlantServiceClient.PostAsync($"PowerPlantData", new StringContent(JsonConvert.SerializeObject(datum), Encoding.UTF8, "application/json")).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 if (response.Content.ReadAsStringAsync().Result == "1")

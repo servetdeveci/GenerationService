@@ -8,7 +8,7 @@ WORKDIR /src
 COPY PowerPlant/PowerPlant.API/*.csproj PowerPlant/PowerPlant.API/
 COPY PowerPlant/PowerPlant.Services/*.csproj PowerPlant/PowerPlant.Services/
 COPY PowerPlant/PowerPlant.Domain/*.csproj PowerPlant/PowerPlant.Domain/
-COPY PowerPlant/PowerPlant.Infrastructure/*.csproj PowerPlant/PowerPlant.Domain/
+COPY PowerPlant/PowerPlant.Infrastructure/*.csproj PowerPlant/PowerPlant.Infrastructure/
 
 COPY Shared/Shared.Domain/*.csproj Shared/Shared.Domain/
 COPY Shared/Shared.Infrastructure/*.csproj Shared/Shared.Domain/
@@ -26,11 +26,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PowerPlant.API.dll"]
-
-
-
-# syntax=docker/dockerfile:1
-#FROM mcr.microsoft.com/dotnet/aspnet:3.1
-#COPY bin/Debug/netcoreapp3.1/ App/
-#WORKDIR /App
-#ENTRYPOINT ["dotnet", "PowerPlant.API.dll"]
