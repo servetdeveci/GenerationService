@@ -24,14 +24,12 @@ namespace PowerPlant.FetchingData.WorkerService
             _logger = logger;
             SetupTimes();
         }
-
         private void SetupTimes()
         {
             second = 1000;
             minute = second * timeFactor;
             hour = minute * timeFactor;
         }
-
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation($"***** Hourly service is started  *******", DateTimeOffset.Now);
@@ -39,64 +37,13 @@ namespace PowerPlant.FetchingData.WorkerService
             _client.BaseAddress = new Uri("http://webapi/api/");
             return base.StartAsync(cancellationToken);
         }
-
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
                 {
-                    var response = _client.GetAsync($"powerplant").Result;
-                    List<PowerPlantDef> list = new List<PowerPlantDef>();
-
-                    var responseBody = response.Content.ReadAsStringAsync().Result;
-                    list = JsonConvert.DeserializeObject<List<PowerPlantDef>>(responseBody);
-                    foreach (var item in list)
-                    {
-                        _logger.LogInformation($"webId: {item.WebId} verileri çekiliyor...");
-                        var dateTime = DateTime.Now;
-                        var endTime = dateTime.ToString();
-                        var startTime = dateTime.AddHours(-1).ToString();
-                        response = _client.GetAsync($"generationservice/get?webId={item.WebId}&startTime={startTime}&endTime={endTime}").Result;    
-                        responseBody = response.Content.ReadAsStringAsync().Result;
-                        var usages = JsonConvert.DeserializeObject<ApiResponse<TimedValues>>(responseBody);
-
-                        if (usages.Status)
-                        {
-                            foreach (var value in usages.Data.Items)
-                            {
-                                var datum = new PowerPlantHourlyDatum
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    PowerPlantId = item.Id,
-                                    Value =JsonConvert.SerializeObject(value.Value),
-                                    CreatedDate = value.Timestamp
-                                };
-                                response = _client.PostAsync($"PowerPlantData", new StringContent(JsonConvert.SerializeObject(datum), Encoding.UTF8, "application/json")).Result;
-                                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                                {
-                                    if (response.Content.ReadAsStringAsync().Result == "1")
-                                    {
-                                        _logger.LogInformation($"Veri eklendi");
-                                    }
-                                    else
-                                    {
-                                        _logger.LogError($"Veri eklenemedi: {response.StatusCode}");
-
-                                    }
-                                }
-                                else
-                                {
-                                    _logger.LogError($"data ekleme servisi hatasý: {response.StatusCode}");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            _logger.LogError($"Serviste random veri oluþturulurken hata gercekleþti: {usages.StatusMessage}");
-                        }
-                    }
+                    GettingPowerPlantAndItsData();
 
                 }
                 catch (Exception ex)
@@ -107,9 +54,68 @@ namespace PowerPlant.FetchingData.WorkerService
                 await Task.Delay(hour, stoppingToken);
             }
         }
+        private void GettingPowerPlantAndItsData()
+        {
+            var response = _client.GetAsync($"powerplant").Result;
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var list = JsonConvert.DeserializeObject<List<PowerPlantDef>>(responseBody);
+            foreach (var item in list)
+            {
+                GettingEachPowerPlantData(out response, out responseBody, item);
+            }
+        }
+        private void GettingEachPowerPlantData(out HttpResponseMessage response, out string responseBody, PowerPlantDef item)
+        {
+            _logger.LogInformation($"webId: {item.WebId} verileri çekiliyor...");
+            var dateTime = DateTime.Now;
+            var endTime = dateTime.ToString();
+            var startTime = dateTime.AddHours(-1).ToString();
+            response = _client.GetAsync($"generationservice/get?webId={item.WebId}&startTime={startTime}&endTime={endTime}").Result;
+            responseBody = response.Content.ReadAsStringAsync().Result;
+            var usages = JsonConvert.DeserializeObject<ApiResponse<TimedValues>>(responseBody);
 
+            if (usages.Status)
+            {
+                foreach (var value in usages.Data.Items)
+                {
+                    response = AddingPowerPlantHourlyData(item, value);
+                }
+            }
+            else
+            {
+                _logger.LogError($"Serviste random veri oluþturulurken hata gercekleþti: {usages.StatusMessage}");
+            }
+        }
+        private HttpResponseMessage AddingPowerPlantHourlyData(PowerPlantDef item, TimedValue value)
+        {
+            HttpResponseMessage response;
+            var datum = new PowerPlantHourlyDatum
+            {
+                Id = Guid.NewGuid().ToString(),
+                PowerPlantId = item.Id,
+                Value = JsonConvert.SerializeObject(value.Value),
+                CreatedDate = value.Timestamp
+            };
+            response = _client.PostAsync($"PowerPlantData", new StringContent(JsonConvert.SerializeObject(datum), Encoding.UTF8, "application/json")).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                if (response.Content.ReadAsStringAsync().Result == "1")
+                {
+                    _logger.LogInformation($"Veri eklendi");
+                }
+                else
+                {
+                    _logger.LogError($"Veri eklenemedi: {response.StatusCode}");
 
+                }
+            }
+            else
+            {
+                _logger.LogError($"data ekleme servisi hatasý: {response.StatusCode}");
+            }
 
+            return response;
+        }
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogDebug($"***** Hourly service is stopped  *******", DateTimeOffset.Now);
