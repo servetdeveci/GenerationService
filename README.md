@@ -31,6 +31,9 @@ Mevcut veritabanı sunucusuna DbContext migrate edilerek ve ConnectionString de 
 
 ### .Net CLI ile Çalıştırılması
 Mevcut veritabanı sunucusuna DbContext migrate edilerek ve ConnectionString de gerekli değişiklikler yapılarak komut satırından proje çalıştırılabilir.
+Aşağıdaki gibi her bir proje gerekli dizinlere erişilerek çalıştırılabilir.
+
+`dotnet run --project ./PowerPlant/PowerPlant.API/PowerPlant.API.csproj`
 
 ## Proje Ağacı
 1. ![image](https://user-images.githubusercontent.com/62391718/133316249-6a933cda-6f9e-4931-ae48-987e86651cec.png)
