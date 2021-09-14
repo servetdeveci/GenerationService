@@ -12,24 +12,23 @@ namespace PowerPlant.UnitTest
 {
     public class PowerPlantUnitTest
     {
-
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IServiceCollection services = new ServiceCollection();
-        private readonly IPowerPlantDefService _powerPlantDefService;
-        private readonly IPowerPlantDatumService _powerPlantDatumService;
-        private readonly string connectionString = "Host=localhost;Port=5432;Database=PowerPlant;Username=postgres;Password=pass";
-        // burada servisleri DI yöntemi ile initialize ediyoruz. Normal veritabaný kullanýlýyor.
+        //// burada servisleri DI yöntemi ile initialize ediyoruz. Normal veritabaný kullanýlýyor.
+        //private readonly IServiceProvider _serviceProvider;
+        //private readonly IServiceCollection services = new ServiceCollection();
+        //private readonly IPowerPlantDefService _powerPlantDefService;
+        //private readonly IPowerPlantDatumService _powerPlantDatumService;
+        //private readonly string connectionString = "Host=database;Port=5432;Database=PowerPlant;Username=postgres;Password=pass";
         
-        // vakit kalýrsa Moq ile deneyeceðim.
+        // Moq ile test.
         private Mock<IPowerPlantDefService> _mockPowerPlantService;
         private Mock<IPowerPlantDatumService> _mockPowerPlantDataService;
         public PowerPlantUnitTest()
         {
-            // normal veritabanýna yazýlarak oluþturulan test
-            services.AddDatabase(connectionString).AddRepositories().AddEntityServices();
-            _serviceProvider = services.BuildServiceProvider();
-            _powerPlantDefService = _serviceProvider.GetRequiredService<IPowerPlantDefService>();
-            _powerPlantDatumService = _serviceProvider.GetRequiredService<IPowerPlantDatumService>();
+            //// normal veritabanýna yazýlarak oluþturulan test
+            //services.AddDatabase(connectionString).AddRepositories().AddEntityServices();
+            //_serviceProvider = services.BuildServiceProvider();
+            //_powerPlantDefService = _serviceProvider.GetRequiredService<IPowerPlantDefService>();
+            //_powerPlantDatumService = _serviceProvider.GetRequiredService<IPowerPlantDatumService>();
 
             // mock kullanýlarak oluþturulan test
             _mockPowerPlantService = new Mock<IPowerPlantDefService>();
@@ -97,9 +96,9 @@ namespace PowerPlant.UnitTest
             _mockPowerPlantService.Setup(x => x.GetAll().Result).Returns(new List<PowerPlantDef>());
             Assert.NotNull(_mockPowerPlantService.Object.GetAll().Result);
 
-            // gercekt db kullanarak
-            var result = _powerPlantDefService.GetAll().Result;
-            Assert.NotNull(result);
+            //// gercekt db kullanarak
+            //var result = _powerPlantDefService.GetAll().Result;
+            //Assert.NotNull(result);
         }
         [Fact]
         public void Getting_PowerPlant()

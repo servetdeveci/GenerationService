@@ -1,13 +1,13 @@
 version: '3.7'
 services:
-  #unittest:
-  #  container_name: 'unittest'
-  #  image: unittest
-  #  build:
-  #    context: .
-  #    dockerfile: Dockerfile-test
-  #  depends_on:
-  #    - webapi
+  unittest:
+    container_name: 'unittest'
+    image: unittest
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    depends_on:
+      - webapi
   angular:
     container_name: 'angular'
     image: 'powerplant-angular'
