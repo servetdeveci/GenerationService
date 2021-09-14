@@ -15,6 +15,7 @@ namespace PowerPlant.FetchingData.WorkerService
 {
     public class Worker : BackgroundService
     {
+        #region Props&Fields&Ctor
         private readonly ILogger<Worker> _logger;
         private HttpClient _client;
         int second, minute, hour;
@@ -24,12 +25,9 @@ namespace PowerPlant.FetchingData.WorkerService
             _logger = logger;
             SetupTimes();
         }
-        private void SetupTimes()
-        {
-            second = 1000;
-            minute = second * timeFactor;
-            hour = minute * timeFactor;
-        }
+        #endregion
+
+        #region BackgroundWorker
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation($"***** Hourly service is started  *******", DateTimeOffset.Now);
@@ -54,6 +52,15 @@ namespace PowerPlant.FetchingData.WorkerService
                 await Task.Delay(hour, stoppingToken);
             }
         }
+        public override Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogDebug($"***** Hourly service is stopped  *******", DateTimeOffset.Now);
+            base.Dispose();
+            return base.StopAsync(cancellationToken);
+        }
+        #endregion
+
+        #region PowerPlantFetchingData
         private void GettingPowerPlantAndItsData()
         {
             var response = _client.GetAsync($"powerplant").Result;
@@ -116,12 +123,17 @@ namespace PowerPlant.FetchingData.WorkerService
 
             return response;
         }
-        public override Task StopAsync(CancellationToken cancellationToken)
+
+        #endregion
+
+        #region Utilities  
+        private void SetupTimes()
         {
-            _logger.LogDebug($"***** Hourly service is stopped  *******", DateTimeOffset.Now);
-            base.Dispose();
-            return base.StopAsync(cancellationToken);
+            second = 1000;
+            minute = second * timeFactor;
+            hour = minute * timeFactor;
         }
 
+        #endregion
     }
 }
