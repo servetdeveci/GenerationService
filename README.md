@@ -32,5 +32,14 @@ Mevcut veritabanı sunucusuna DbContext migrate edilerek ve ConnectionString de 
 ### .Net CLI ile Çalıştırılması
 Mevcut veritabanı sunucusuna DbContext migrate edilerek ve ConnectionString de gerekli değişiklikler yapılarak komut satırından proje çalıştırılabilir.
 
+## Proje Ağacı
+1. ![image](https://user-images.githubusercontent.com/62391718/133316249-6a933cda-6f9e-4931-ae48-987e86651cec.png)
+
+## Çalışan Ekran Görüntüleri
+1. ![image](https://user-images.githubusercontent.com/62391718/133315636-cdf09d91-8a59-446f-9765-aeccebccf58a.png)
+2. ![image](https://user-images.githubusercontent.com/62391718/133315848-9c572826-0dbd-493b-b95c-b2b0bffa330a.png)
+3. ![image](https://user-images.githubusercontent.com/62391718/133315910-c8f78361-5fa4-4630-b2b7-fa47143c8d0a.png)
+
+
 
 
