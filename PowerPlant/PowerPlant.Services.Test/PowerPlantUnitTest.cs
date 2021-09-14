@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using Xunit;
 
-namespace PowerPlant.Test
+namespace PowerPlant.UnitTest
 {
     public class PowerPlantUnitTest
     {
@@ -15,7 +15,7 @@ namespace PowerPlant.Test
         private readonly IServiceCollection services = new ServiceCollection();
         private readonly IPowerPlantDefService _powerPlantDefService;
         private readonly IPowerPlantDatumService _powerPlantDatumService;
-        private readonly string connectionString = "Host=localhost;Database=PowerPlant;Username=postgres;Password=pass";
+        private readonly string connectionString = "Host=localhost;Port=5432;Database=PowerPlant;Username=postgres;Password=pass";
         // burada servisleri DI yöntemi ile initialize ediyoruz. Normal veritabaný kullanýlýyor.
         // vakit kalýrsa Moq ile deneyeceðim.
         public PowerPlantUnitTest()

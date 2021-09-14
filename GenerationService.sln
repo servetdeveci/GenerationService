@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.API", "PowerPlan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.UI.Angular", "PowerPlant\PowerPlant.UI.Angular\PowerPlant.UI.Angular.csproj", "{8C758228-E063-48F6-BA3B-F295C62A4D42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.Services.Test", "PowerPlant\PowerPlant.Services.Test\PowerPlant.Services.Test.csproj", "{C8082B2F-7B90-4DCA-BDEC-A5DB3AAEB3C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.Services.UnitTest", "PowerPlant\PowerPlant.Services.Test\PowerPlant.Services.UnitTest.csproj", "{C8082B2F-7B90-4DCA-BDEC-A5DB3AAEB3C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerFiles", "DockerFiles", "{1D7531F3-3B75-45B9-870F-70EE76319149}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerFiles", "DockerFiles"
 		Dockerfile-ws = Dockerfile-ws
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerPlant.IntegrationTests", "PowerPlant\PowerPlant.IntegrationTests\PowerPlant.IntegrationTests.csproj", "{8CE71FB6-B262-4CF0-9CCD-984ED0CF18FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPlant.IntegrationTests", "PowerPlant\PowerPlant.IntegrationTests\PowerPlant.IntegrationTests.csproj", "{8CE71FB6-B262-4CF0-9CCD-984ED0CF18FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

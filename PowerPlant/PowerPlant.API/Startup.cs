@@ -21,8 +21,7 @@ namespace PowerPlant.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var connectionString = "Host=localhost;Port=5432;Database=PowerPlant;Username=postgres;Password=pass";
-            services.AddDatabase(connectionString).AddRepositories().AddEntityServices();
+            services.AddDatabase(Configuration).AddRepositories().AddEntityServices();
             services.AddSwaggerGen();
             services.AddCors(options =>
             {

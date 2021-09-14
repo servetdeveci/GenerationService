@@ -2,7 +2,7 @@
 
 namespace Shared.Domain.Base
 {
-    public class DeleteEntity : EntityBase, IDeleteEntity
+    public abstract class DeleteEntity : EntityBase, IDeleteEntity
     {
         public bool IsDeleted { get;set; }
         public DateTime DeletedDate { get;set; }
