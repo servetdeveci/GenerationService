@@ -9,11 +9,11 @@ using Xunit;
 
 namespace PowerPlant.IntegrationTests
 {
-    public class GettingApiData : IClassFixture<TestFixture>
+    public class GettingApiData : IClassFixture<ApiTestFixture>
     {
         private readonly HttpClient _client;
 
-        public GettingApiData(TestFixture fixture)
+        public GettingApiData(ApiTestFixture fixture)
         {
             _client = fixture.Client;
         }

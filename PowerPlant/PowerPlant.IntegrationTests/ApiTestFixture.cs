@@ -5,20 +5,17 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace PowerPlant.IntegrationTests
 {
-    public class TestFixture : IDisposable
+    public class ApiTestFixture : IDisposable
     {
-        private readonly TestServer _server;
+        private readonly TestServer _apiTestServer;
 
-        public TestFixture()
+        public ApiTestFixture()
         {
             var builder = new WebHostBuilder()
-                .UseStartup<API.Startup>()
-                .ConfigureAppConfiguration((context, configBuilder) =>
-                {
-                });
-            _server = new TestServer(builder);
+                .UseStartup<API.Startup>();
+            _apiTestServer = new TestServer(builder);
 
-            Client = _server.CreateClient();
+            Client = _apiTestServer.CreateClient();
             Client.BaseAddress = new Uri("http://localhost");
         }
 
@@ -27,7 +24,7 @@ namespace PowerPlant.IntegrationTests
         public void Dispose()
         {
             Client.Dispose();
-            _server.Dispose();
+            _apiTestServer.Dispose();
         }
     }
 }
