@@ -3,7 +3,7 @@
 Generic Repository ve Unit of Work yapısı ile kurgulanmış ihtiyaç olunan bir cok yapıyı içinde bulunduran ve kendim için referans olan bir projedir. Normalde bir Case olarak başladığım bu projeye zamanım oldukça yeni projeler ve yapılar eklenecektir.
 
 ## ****** Shared *******
-Micro servis mimarisi için repository ve uow yapısı generic olarak yazılmıstır. Temel olarak buraya eklenen her projenin Domain ve Infrastructure katmanları bu yapıdan türeyecektir.
+Microservis mimarisi için repository ve uow yapısı generic olarak yazılmıstır. Temel olarak buraya eklenen her projenin Domain ve Infrastructure katmanları bu yapıdan türeyecektir.
 ### Shared.Domain
 Bu katman ile implement edilecek soyut yapılar tanımlanacaktır
 
