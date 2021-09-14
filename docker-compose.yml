@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile-test
     depends_on:
-      - webapi
+      - database
   angular:
     container_name: 'angular'
     image: 'powerplant-angular'
