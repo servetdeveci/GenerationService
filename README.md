@@ -16,6 +16,7 @@ Santrallerin ürettikleri verileri saatte bir çekip kaydeden ve bu santrallerin
 #### ** DDD mimaris ile kurulmuş yapıda: **
 - .net core webapi --> Arayüz katmanlarına veri sağlamak için geliştirilmiştir.
 - belirli zamanlarda background servis olarak çalışan bir WorkerService
+- WorkerService için rastgele doğru ve hatalı veri üreten webapi projesi
 - CRUD işlemleri için xunit ile yazılmış unit test projesi
 - Front-End için Angular projesi
 - ve bunların altyapısını sağlayan Domain, Infrastructure ve Service projeleri
