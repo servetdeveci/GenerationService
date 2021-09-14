@@ -36,7 +36,7 @@ Aşağıdaki gibi her bir proje gerekli dizinlere erişilerek çalıştırılabi
 
 `dotnet run --project ./PowerPlant/PowerPlant.API/PowerPlant.API.csproj`
 
-## Proje Ağacı
+## Proje Mimarisi
 1. ![image](https://user-images.githubusercontent.com/62391718/133316249-6a933cda-6f9e-4931-ae48-987e86651cec.png)
 
 ## Çalışan Ekran Görüntüleri
