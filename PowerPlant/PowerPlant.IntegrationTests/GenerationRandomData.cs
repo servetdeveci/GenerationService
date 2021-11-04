@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PowerPlant.Domain.Entities;
 using PowerPlant.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -29,7 +25,6 @@ namespace PowerPlant.IntegrationTests
             var usages = JsonConvert.DeserializeObject<ApiResponse<TimedValues>>(responseBody);
             Assert.NotNull(usages.Data.Items);
         }
-
        
     }
 }
